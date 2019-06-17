@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "cosmeticarmorslots",
+  "version": "${version}",
+
+  "name": "Cosmetic Armor Slots",
+  "description": "Adds new cosmetic armor slots. You can stop hiding your skin under ugly iron or you can wear your best-looking armor!",
+  "authors": [
+    "brianflakes"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/cosmeticarmorslots/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.briansemrau.cosmeticarmorslots.CosmeticArmorSlots"
+    ]
+  },
+  "mixins": [
+    "cosmeticarmorslots.mixins.json"
+  ],
+
+  "requires": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}

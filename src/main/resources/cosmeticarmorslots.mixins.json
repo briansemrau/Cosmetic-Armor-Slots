@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "io.github.briansemrau.cosmeticarmorslots.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "PlayerInventoryMixin",
+    "PlayerContainerMixin",
+    "InventoryScreenMixin",
+    "CreativeInventoryScreenMixin",
+    "PlayerEntityMixin",
+    "ArmorFeatureRendererMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
