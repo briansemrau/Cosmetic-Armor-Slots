@@ -1,4 +1,4 @@
-package io.github.briansemrau.cosmeticarmorslots.mixin;
+package com.github.briansemrau.cosmeticarmorslots.mixin;
 
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;

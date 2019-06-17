@@ -1,6 +1,6 @@
-package io.github.briansemrau.cosmeticarmorslots.mixin;
+package com.github.briansemrau.cosmeticarmorslots.mixin;
 
-import io.github.briansemrau.cosmeticarmorslots.interfaces.IPlayerInventoryMixin;
+import com.github.briansemrau.cosmeticarmorslots.interfaces.IPlayerInventoryMixin;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;

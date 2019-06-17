@@ -1,4 +1,4 @@
-package io.github.briansemrau.cosmeticarmorslots.interfaces;
+package com.github.briansemrau.cosmeticarmorslots.interfaces;
 
 public interface IPlayerContainerMixin {
 

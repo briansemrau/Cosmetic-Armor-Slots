@@ -9,17 +9,17 @@
     "brianflakes"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "",
+    "sources": "https://github.com/briansemrau/Cosmetic-Armor-Slots"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/cosmeticarmorslots/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.briansemrau.cosmeticarmorslots.CosmeticArmorSlots"
+      "com.github.briansemrau.cosmeticarmorslots.CosmeticArmorSlots"
     ]
   },
   "mixins": [

@@ -1,4 +1,4 @@
-package io.github.briansemrau.cosmeticarmorslots;
+package com.github.briansemrau.cosmeticarmorslots;
 
 import net.fabricmc.api.ModInitializer;
 

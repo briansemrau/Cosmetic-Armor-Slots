@@ -1,4 +1,4 @@
-package io.github.briansemrau.cosmeticarmorslots.interfaces;
+package com.github.briansemrau.cosmeticarmorslots.interfaces;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DefaultedList;

@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "io.github.briansemrau.cosmeticarmorslots.mixin",
+  "package": "com.github.briansemrau.cosmeticarmorslots.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "PlayerInventoryMixin",

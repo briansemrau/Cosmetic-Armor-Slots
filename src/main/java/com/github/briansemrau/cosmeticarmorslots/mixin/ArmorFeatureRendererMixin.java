@@ -1,7 +1,7 @@
-package io.github.briansemrau.cosmeticarmorslots.mixin;
+package com.github.briansemrau.cosmeticarmorslots.mixin;
 
-import io.github.briansemrau.cosmeticarmorslots.interfaces.IPlayerEntityMixin;
-import io.github.briansemrau.cosmeticarmorslots.interfaces.IPlayerInventoryMixin;
+import com.github.briansemrau.cosmeticarmorslots.interfaces.IPlayerEntityMixin;
+import com.github.briansemrau.cosmeticarmorslots.interfaces.IPlayerInventoryMixin;
 import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;

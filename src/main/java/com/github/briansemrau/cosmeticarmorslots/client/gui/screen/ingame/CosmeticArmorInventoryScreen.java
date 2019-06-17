@@ -1,8 +1,8 @@
-package io.github.briansemrau.cosmeticarmorslots.client.gui.screen.ingame;
+package com.github.briansemrau.cosmeticarmorslots.client.gui.screen.ingame;
 
+import com.github.briansemrau.cosmeticarmorslots.interfaces.IPlayerEntityMixin;
 import com.mojang.blaze3d.platform.GlStateManager;
-import io.github.briansemrau.cosmeticarmorslots.interfaces.IPlayerEntityMixin;
-import io.github.briansemrau.cosmeticarmorslots.interfaces.IPlayerInventoryMixin;
+import com.github.briansemrau.cosmeticarmorslots.interfaces.IPlayerInventoryMixin;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
