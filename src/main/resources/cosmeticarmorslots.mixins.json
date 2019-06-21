@@ -7,8 +7,7 @@
     "PlayerContainerMixin",
     "InventoryScreenMixin",
     "CreativeInventoryScreenMixin",
-    "PlayerEntityMixin",
-    "ArmorFeatureRendererMixin"
+    "PlayerEntityMixin"
   ],
   "client": [
   ],
