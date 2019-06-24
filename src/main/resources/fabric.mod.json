@@ -6,10 +6,10 @@
   "name": "Cosmetic Armor Slots",
   "description": "Adds new cosmetic armor slots. You can stop hiding your skin under ugly iron or you can wear your best-looking armor!",
   "authors": [
-    "brianflakes"
+    "brian_flakes"
   ],
   "contact": {
-    "homepage": "",
+    "homepage": "https://minecraft.curseforge.com/projects/cosmetic-armor-slots",
     "sources": "https://github.com/briansemrau/Cosmetic-Armor-Slots"
   },
 
