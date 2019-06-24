@@ -1,8 +1,9 @@
 # Cosmetic Armor Slots
 
-A [Fabric](fabricmc.net) mod that adds cosmetic armor slots to Minecraft.
-
+A [Fabric](fabricmc.net) mod that adds cosmetic armor slots to Minecraft.<br>
 Currently supports Minecraft version 1.14.2
+
+Released on [Minecraft Curseforge](https://minecraft.curseforge.com/projects/cosmetic-armor-slots).
 
 ## Bug Reporting
 If your game crashes or something weird happens, submit an issue on GitHub with (at a minimum) these details:
