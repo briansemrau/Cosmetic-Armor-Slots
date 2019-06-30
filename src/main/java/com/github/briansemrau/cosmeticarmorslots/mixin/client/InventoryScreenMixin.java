@@ -1,4 +1,4 @@
-package com.github.briansemrau.cosmeticarmorslots.mixin;
+package com.github.briansemrau.cosmeticarmorslots.mixin.client;
 
 import com.github.briansemrau.cosmeticarmorslots.client.gui.screen.ingame.CosmeticArmorInventoryScreen;
 import net.fabricmc.api.EnvType;

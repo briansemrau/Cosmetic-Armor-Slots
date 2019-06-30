@@ -3,13 +3,14 @@
   "package": "com.github.briansemrau.cosmeticarmorslots.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "PlayerInventoryMixin",
-    "PlayerContainerMixin",
-    "InventoryScreenMixin",
-    "CreativeInventoryScreenMixin",
-    "PlayerEntityMixin"
+    "common/PlayerInventoryMixin",
+    "common/PlayerContainerMixin",
+    "common/PlayerEntityMixin"
   ],
   "client": [
+    "client/InventoryScreenMixin",
+    "client/CreativeInventoryScreenMixin",
+    "client/PlayerEntityMixinClient",
   ],
   "injectors": {
     "defaultRequire": 1

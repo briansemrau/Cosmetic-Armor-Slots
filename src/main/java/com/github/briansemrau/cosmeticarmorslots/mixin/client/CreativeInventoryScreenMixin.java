@@ -1,5 +1,7 @@
-package com.github.briansemrau.cosmeticarmorslots.mixin;
+package com.github.briansemrau.cosmeticarmorslots.mixin.client;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.container.Slot;
@@ -14,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /**
  * This mixin removes the bug where extra slots mixed into PlayerContainer show up on the hotbar.
  */
+@Environment(EnvType.CLIENT)
 @Mixin(CreativeInventoryScreen.class)
 public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeContainer> {
 
