@@ -18,7 +18,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 import javax.annotation.Nullable;
@@ -34,7 +34,7 @@ public class CosmeticArmorInventoryScreen extends AbstractContainerScreen<Cosmet
     private float mouseY;
 
     public CosmeticArmorInventoryScreen(PlayerEntity playerEntity) {
-        super(new CosmeticArmorSlotsContainer(playerEntity.inventory), playerEntity.inventory, new TranslatableComponent("container.cosmeticarmorslots"));
+        super(new CosmeticArmorSlotsContainer(playerEntity.inventory), playerEntity.inventory, new TranslatableText("container.cosmeticarmorslots"));
     }
 
     @Override
