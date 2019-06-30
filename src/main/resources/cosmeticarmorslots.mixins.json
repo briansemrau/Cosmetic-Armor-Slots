@@ -10,7 +10,7 @@
   "client": [
     "client/InventoryScreenMixin",
     "client/CreativeInventoryScreenMixin",
-    "client/PlayerEntityMixinClient",
+    "client/PlayerEntityMixinClient"
   ],
   "injectors": {
     "defaultRequire": 1
