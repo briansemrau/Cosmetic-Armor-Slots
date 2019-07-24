@@ -48,7 +48,7 @@ public class CosmeticArmorInventoryScreen extends AbstractContainerScreen<Cosmet
             IPlayerEntityMixin player = ((IPlayerEntityMixin) this.playerInventory.player);
             this.addButton(new ButtonWidget(this.left + 94, this.top + 12 + i * 18, 8, 8, "", (buttonWidget) -> {
                 player.setUseCosmeticArmorSlot(slotIndex, !player.getUseCosmeticArmorSlot(slotIndex));
-                this.minecraft.getNetworkHandler().getClientConnection().send(CosmeticArmorSlotsNetwork.createCosmeticSlotVisibilityUpdatePacket(EquipmentSlot.fromTypeIndex(EquipmentSlot.Type.ARMOR, slotIndex), player.getUseCosmeticArmorSlot(slotIndex)));
+                this.minecraft.getNetworkHandler().getConnection().send(CosmeticArmorSlotsNetwork.createCosmeticSlotVisibilityUpdatePacket(EquipmentSlot.fromTypeIndex(EquipmentSlot.Type.ARMOR, slotIndex), player.getUseCosmeticArmorSlot(slotIndex)));
             }) {
                 @Override
                 public void render(int int_1, int int_2, float float_1) {

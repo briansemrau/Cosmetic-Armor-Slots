@@ -9,10 +9,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Nameable;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -56,7 +53,7 @@ public abstract class PlayerInventoryMixin implements Inventory, Nameable, IPlay
 
     @Inject(method = "<init>*", at = @At("RETURN"))
     public void onConstructed(PlayerEntity playerEntity, CallbackInfo ci) {
-        cosmeticArmor = DefaultedList.create(4, ItemStack.EMPTY);
+        cosmeticArmor = DefaultedList.ofSize(4, ItemStack.EMPTY);
 
         // Change combinedInventory to a mutable type
         combinedInventory = new ArrayList<>(combinedInventory);
@@ -96,8 +93,11 @@ public abstract class PlayerInventoryMixin implements Inventory, Nameable, IPlay
         }
     }
 
-    // Overwrite
-    public int getInvSize(CallbackInfo ci) {
+    /**
+     * @author brian_flakes
+     */
+    @Overwrite
+    public int getInvSize() {
         int size = 0;
         for (DefaultedList list : combinedInventory) {
             size += list.size();

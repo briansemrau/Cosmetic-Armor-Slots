@@ -35,7 +35,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IPlayerE
 
     @Environment(EnvType.SERVER)
     @Unique
-    private final DefaultedList<ItemStack> equippedCosmeticArmor = DefaultedList.create(4, ItemStack.EMPTY);
+    private final DefaultedList<ItemStack> equippedCosmeticArmor = DefaultedList.ofSize(4, ItemStack.EMPTY);
     @Environment(EnvType.SERVER)
     @Unique
     private final boolean[] storedUsingCosmeticArmorSlot = new boolean[4];
