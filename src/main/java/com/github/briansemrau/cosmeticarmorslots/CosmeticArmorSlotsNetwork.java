@@ -20,15 +20,6 @@ public class CosmeticArmorSlotsNetwork {
     public static final Identifier VISIBILITY_UPDATE_PACKET = new Identifier(MOD_ID, "visibility_update");
 
     public static void onInitialize() {
-        ServerSidePacketRegistry.INSTANCE.register(VISIBILITY_UPDATE_PACKET, (packetContext, packetByteBuf) -> {
-            EquipmentSlot slot = packetByteBuf.readEnumConstant(EquipmentSlot.class);
-            boolean visible = packetByteBuf.readBoolean();
-
-            ((IPlayerEntityMixin) packetContext.getPlayer()).setUseCosmeticArmorSlot(slot.getEntitySlotId(), visible);
-        });
-    }
-
-    public static void onInitializeClient() {
         ClientSidePacketRegistry.INSTANCE.register(EQUIP_COSMETIC_ARMOR_PACKET, (packetContext, packetByteBuf) -> {
             int entityId = packetByteBuf.readVarInt();
             EquipmentSlot slot = packetByteBuf.readEnumConstant(EquipmentSlot.class);
@@ -40,6 +31,12 @@ public class CosmeticArmorSlotsNetwork {
                 ((IPlayerEntityMixin) player).setEquippedCosmeticArmor(slot, stack);
                 ((IPlayerEntityMixin) player).setUseCosmeticArmorSlot(slot.getEntitySlotId(), useCosmeticSlot);
             }
+        });
+        ServerSidePacketRegistry.INSTANCE.register(VISIBILITY_UPDATE_PACKET, (packetContext, packetByteBuf) -> {
+            EquipmentSlot slot = packetByteBuf.readEnumConstant(EquipmentSlot.class);
+            boolean visible = packetByteBuf.readBoolean();
+
+            ((IPlayerEntityMixin) packetContext.getPlayer()).setUseCosmeticArmorSlot(slot.getEntitySlotId(), visible);
         });
     }
 

@@ -6,7 +6,7 @@ public class CosmeticArmorSlotsClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		CosmeticArmorSlotsNetwork.onInitializeClient();
+//		CosmeticArmorSlotsNetwork.onInitializeClient();
 	}
 
 }
