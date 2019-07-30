@@ -93,16 +93,13 @@ public abstract class PlayerInventoryMixin implements Inventory, Nameable, IPlay
         }
     }
 
-    /**
-     * @author brian_flakes
-     */
-    @Overwrite
-    public int getInvSize() {
+    @Inject(method = "getInvSize", at = @At("HEAD"), cancellable = true)
+    public void onGetInvSize(CallbackInfoReturnable<Integer> cir) {
         int size = 0;
         for (DefaultedList list : combinedInventory) {
             size += list.size();
         }
-        return size;
+        cir.setReturnValue(size);
     }
 
     @Inject(method = "isInvEmpty", at = @At("HEAD"), cancellable = true)
