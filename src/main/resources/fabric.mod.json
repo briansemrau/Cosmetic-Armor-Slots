@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Cosmetic Armor Slots",
-  "description": "Adds new cosmetic armor slots. You can stop hiding your skin under ugly iron or you can wear your best-looking armor!",
+  "description": "Adds new cosmetic armor slots. Get fashionable!",
   "authors": [
     "brian_flakes"
   ],
@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "com.github.briansemrau.cosmeticarmorslots.CosmeticArmorSlots"
+    ],
+    "client": [
+      "com.github.briansemrau.cosmeticarmorslots.CosmeticArmorSlotsClient"
     ]
   },
   "mixins": [
