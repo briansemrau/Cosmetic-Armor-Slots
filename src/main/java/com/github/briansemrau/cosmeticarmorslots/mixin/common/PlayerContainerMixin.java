@@ -1,6 +1,7 @@
 package com.github.briansemrau.cosmeticarmorslots.mixin.common;
 
 import com.github.briansemrau.cosmeticarmorslots.interfaces.IPlayerContainerMixin;
+import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.container.ContainerType;
@@ -14,6 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,7 +28,7 @@ public abstract class PlayerContainerMixin extends CraftingContainer<CraftingInv
 
     @Shadow
     @Final
-    private static String[] EMPTY_ARMOR_SLOT_IDS;
+    private static  Identifier[] EMPTY_ARMOR_SLOT_TEXTURES;
 
     @Shadow
     @Final
@@ -59,8 +61,8 @@ public abstract class PlayerContainerMixin extends CraftingContainer<CraftingInv
                 }
 
                 @Environment(EnvType.CLIENT)
-                public String getBackgroundSprite() {
-                    return EMPTY_ARMOR_SLOT_IDS[equipmentSlot_1.getEntitySlotId()];
+                public Pair<Identifier, Identifier> getBackgroundSprite() {
+                    return Pair.of(PlayerContainer.BLOCK_ATLAS_TEXTURE, EMPTY_ARMOR_SLOT_TEXTURES[equipmentSlot_1.getEntitySlotId()]);
                 }
             };
             this.addSlot(slot);

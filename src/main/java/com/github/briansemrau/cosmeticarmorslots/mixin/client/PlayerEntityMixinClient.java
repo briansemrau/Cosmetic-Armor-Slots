@@ -13,7 +13,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import org.spongepowered.asm.lib.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -22,6 +21,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Arrays;
+
+import static org.objectweb.asm.Opcodes.GETFIELD;
 
 @Environment(EnvType.CLIENT)
 @Mixin(PlayerEntity.class)
@@ -55,7 +56,7 @@ public abstract class PlayerEntityMixinClient extends LivingEntity implements IP
     @Inject(method = "getEquippedStack",
             at = @At(value = "FIELD",
                     shift = At.Shift.BEFORE,
-                    opcode = Opcodes.GETFIELD,
+                    opcode = GETFIELD,
                     target = "Lnet/minecraft/entity/player/PlayerInventory;armor:Lnet/minecraft/util/DefaultedList;"),
             cancellable = true)
     public void onGetEquippedStack(EquipmentSlot equipmentSlot, CallbackInfoReturnable<ItemStack> cir) {
