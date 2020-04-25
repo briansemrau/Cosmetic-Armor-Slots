@@ -33,14 +33,14 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     @Inject(method = "init", at = @At("TAIL"))
     protected void onInit(CallbackInfo ci) {
         if (!this.minecraft.interactionManager.hasCreativeInventory()) {
-            this.addButton(new TexturedButtonWidget(this.left + 66, this.height / 2 - 14, 8, 8, 0, 0, 8, COSMETIC_BUTTON_TEX, 8, 16, (buttonWidget) -> {
+            this.addButton(new TexturedButtonWidget(this.x + 66, this.height / 2 - 14, 8, 8, 0, 0, 8, COSMETIC_BUTTON_TEX, 8, 16, (buttonWidget) -> {
                 this.minecraft.openScreen(new CosmeticArmorInventoryScreen(this.playerInventory.player));
                 this.isMouseDown = true;
             }) {
                 @Override
                 public void renderButton(int int_1, int int_2, float float_1) {
                     super.renderButton(int_1, int_2, float_1);
-                    this.setPos(InventoryScreenMixin.this.left + 66, InventoryScreenMixin.this.height / 2 - 14);
+                    this.setPos(InventoryScreenMixin.this.x + 66, InventoryScreenMixin.this.height / 2 - 14);
                 }
             });
         }

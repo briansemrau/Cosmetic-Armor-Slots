@@ -4,10 +4,11 @@ import com.github.briansemrau.cosmeticarmorslots.CosmeticArmorSlotsNetwork;
 import com.github.briansemrau.cosmeticarmorslots.interfaces.IPlayerEntityMixin;
 import com.github.briansemrau.cosmeticarmorslots.interfaces.IPlayerInventoryMixin;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ingame.AbstractContainerScreen;
+import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
@@ -22,9 +23,10 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 import javax.annotation.Nullable;
+import java.lang.reflect.Field;
 
 @Environment(EnvType.CLIENT)
-public class CosmeticArmorInventoryScreen extends AbstractContainerScreen<CosmeticArmorInventoryScreen.CosmeticArmorSlotsContainer> {
+public class CosmeticArmorInventoryScreen extends ContainerScreen<CosmeticArmorInventoryScreen.CosmeticArmorSlotsContainer> {
 
     private static final Identifier TEXTURE = new Identifier("cosmeticarmorslots", "textures/gui/container/cosmeticarmorslots.png");
     private static final Identifier COSMETIC_BUTTON_TEX = new Identifier("cosmeticarmorslots", "textures/gui/cosmetic_armor_button.png");
@@ -40,13 +42,13 @@ public class CosmeticArmorInventoryScreen extends AbstractContainerScreen<Cosmet
     @Override
     protected void init() {
         super.init();
-        this.addButton(new TexturedButtonWidget(this.left + 66, this.height / 2 - 14, 8, 8, 0, 0, 8, COSMETIC_BUTTON_TEX, 8, 16, (buttonWidget) -> {
+        this.addButton(new TexturedButtonWidget(this.x + 66, this.height / 2 - 14, 8, 8, 0, 0, 8, COSMETIC_BUTTON_TEX, 8, 16, (buttonWidget) -> {
             this.minecraft.openScreen(new InventoryScreen(this.playerInventory.player));
         }));
         for (int i = 0; i < 4; ++i) {
             int slotIndex = 3 - i;
             IPlayerEntityMixin player = ((IPlayerEntityMixin) this.playerInventory.player);
-            this.addButton(new ButtonWidget(this.left + 94, this.top + 12 + i * 18, 8, 8, "", (buttonWidget) -> {
+            this.addButton(new ButtonWidget(this.x + 94, this.y + 12 + i * 18, 8, 8, "", (buttonWidget) -> {
                 player.setUseCosmeticArmorSlot(slotIndex, !player.getUseCosmeticArmorSlot(slotIndex));
                 this.minecraft.getNetworkHandler().getConnection().send(CosmeticArmorSlotsNetwork.createCosmeticSlotVisibilityUpdatePacket(EquipmentSlot.fromTypeIndex(EquipmentSlot.Type.ARMOR, slotIndex), player.getUseCosmeticArmorSlot(slotIndex)));
             }) {
@@ -97,16 +99,16 @@ public class CosmeticArmorInventoryScreen extends AbstractContainerScreen<Cosmet
     protected void drawBackground(float var1, int var2, int var3) {
         GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(TEXTURE);
-        this.blit(this.left, this.top, 0, 0, this.containerWidth, this.containerHeight);
-        InventoryScreen.drawEntity(this.left + 51, this.top + 75, 30, (float) (this.left + 51) - this.mouseX, (float) (this.top + 75 - 50) - this.mouseY, this.minecraft.player);
+        this.blit(this.x, this.y, 0, 0, this.containerWidth, this.containerHeight);
+        InventoryScreen.drawEntity(this.x + 51, this.y + 75, 30, (float) (this.x + 51) - this.mouseX, (float) (this.y + 75 - 50) - this.mouseY, this.minecraft.player);
     }
 
     //    @Environment(EnvType.CLIENT)
     static class ProxySlot extends Slot {
         private final Slot slot;
 
-        ProxySlot(Slot slot_1, int int_1) {
-            super(slot_1.inventory, int_1, 0, 0);
+        ProxySlot(Slot slot_1, int int_1, int xPos, int yPos) {
+            super(slot_1.inventory, int_1, xPos, yPos);
             this.slot = slot_1;
         }
 
@@ -144,7 +146,7 @@ public class CosmeticArmorInventoryScreen extends AbstractContainerScreen<Cosmet
         }
 
         @Nullable
-        public String getBackgroundSprite() {
+        public Pair<Identifier, Identifier> getBackgroundSprite() {
             return this.slot.getBackgroundSprite();
         }
 
@@ -166,28 +168,29 @@ public class CosmeticArmorInventoryScreen extends AbstractContainerScreen<Cosmet
         CosmeticArmorSlotsContainer(PlayerInventory playerInventory) {
             super(null, 0);
 
-            for (int i = 0; i < playerInventory.player.playerContainer.slotList.size(); ++i) {
-                Slot originalSlot = playerInventory.player.playerContainer.slotList.get(i);
-                Slot slot = new ProxySlot(originalSlot, i);
-                this.addSlot(slot);
-
+            for (int i = 0; i < playerInventory.player.playerContainer.slots.size(); ++i) {
+                Slot originalSlot = playerInventory.player.playerContainer.slots.get(i);
+                //Slot slot = new ProxySlot(originalSlot, i);
+                int xPos = originalSlot.xPosition;
+                int yPos = originalSlot.yPosition;
                 if (i < 5) {
                     // crafting slots
-                    slot.xPosition = -10000;
-                    slot.yPosition = -10000;
+                    xPos = -10000;
+                    yPos = -10000;
                 } else if (i == 45) {
                     // offhand slot
-                    slot.xPosition = 152;
-                    slot.yPosition = 62;
+                    xPos = 152;
+                    yPos = 62;
                 } else if (i >= 46 && i < 50) {
                     // cosmetic armor slots
-                    slot.xPosition = 77;
-                    slot.yPosition = 8 + (i - 46) * 18;
+                    xPos = 77;
+                    yPos = 8 + (i - 46) * 18;
                 } else {
                     // everything else
-                    slot.xPosition = originalSlot.xPosition;
-                    slot.yPosition = originalSlot.yPosition;
+                    xPos = originalSlot.xPosition;
+                    yPos = originalSlot.yPosition;
                 }
+                this.addSlot(new ProxySlot(originalSlot,i,xPos,yPos));
             }
         }
 
@@ -197,7 +200,7 @@ public class CosmeticArmorInventoryScreen extends AbstractContainerScreen<Cosmet
 
         public ItemStack transferSlot(PlayerEntity playerEntity_1, int int_1) {
             ItemStack itemStack_1 = ItemStack.EMPTY;
-            Slot slot_1 = (Slot) this.slotList.get(int_1);
+            Slot slot_1 = (Slot) this.slots.get(int_1);
             if (slot_1 != null && slot_1.hasStack()) {
                 ItemStack itemStack_2 = slot_1.getStack();
                 itemStack_1 = itemStack_2.copy();
@@ -216,12 +219,12 @@ public class CosmeticArmorInventoryScreen extends AbstractContainerScreen<Cosmet
                     if (!this.insertItem(itemStack_2, 9, 45, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (equipmentSlot_1.getType() == EquipmentSlot.Type.ARMOR && !((Slot) this.slotList.get(8 - equipmentSlot_1.getEntitySlotId())).hasStack()) {
+                } else if (equipmentSlot_1.getType() == EquipmentSlot.Type.ARMOR && !((Slot) this.slots.get(8 - equipmentSlot_1.getEntitySlotId())).hasStack()) {
                     int int_2 = 8 - equipmentSlot_1.getEntitySlotId();
                     if (!this.insertItem(itemStack_2, int_2, int_2 + 1, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (equipmentSlot_1 == EquipmentSlot.OFFHAND && !((Slot) this.slotList.get(45)).hasStack()) {
+                } else if (equipmentSlot_1 == EquipmentSlot.OFFHAND && !((Slot) this.slots.get(45)).hasStack()) {
                     if (!this.insertItem(itemStack_2, 45, 46, false)) {
                         return ItemStack.EMPTY;
                     }

@@ -82,7 +82,7 @@ public abstract class PlayerInventoryMixin implements Inventory, Nameable, IPlay
     public void onDeserialize(ListTag listTag_1, CallbackInfo ci) {
         this.cosmeticArmor.clear();
         for (int i = 0; i < listTag_1.size(); ++i) {
-            CompoundTag ct = listTag_1.getCompoundTag(i);
+            CompoundTag ct = listTag_1.getCompound(i);
             int slot = ct.getByte("Slot") & 255;
             ItemStack itemStack = ItemStack.fromTag(ct);
             if (!itemStack.isEmpty()) {

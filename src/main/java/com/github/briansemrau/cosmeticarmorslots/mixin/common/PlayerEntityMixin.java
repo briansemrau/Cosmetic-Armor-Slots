@@ -93,7 +93,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IPlayerE
 
                 // If either state changed, send packet to update other clients
                 if (!ItemStack.areEqualIgnoreDamage(actualEquippedStack, storedEquippedStack) || actualVisibility != storedVisibility) {
-                    ((ServerWorld) this.world).method_14178().sendToOtherNearbyPlayers(this, CosmeticArmorSlotsNetwork.createEquipCosmeticArmorPacket(this.getEntityId(), equipmentSlot, actualEquippedStack, actualVisibility));
+                    ((ServerWorld) this.world).getChunkManager().sendToOtherNearbyPlayers(this, CosmeticArmorSlotsNetwork.createEquipCosmeticArmorPacket(this.getEntityId(), equipmentSlot, actualEquippedStack, actualVisibility));
                     this.equippedCosmeticArmor.set(slotId, actualEquippedStack.isEmpty() ? ItemStack.EMPTY : actualEquippedStack.copy());
                     this.storedUsingCosmeticArmorSlot[slotId] = actualVisibility;
                 }
@@ -103,7 +103,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IPlayerE
 
     @Inject(method = "readCustomDataFromTag", at = @At("TAIL"))
     private void onReadCustomDataFromTag(CompoundTag compoundTag, CallbackInfo ci) {
-        if (compoundTag.containsKey("ArmorVisibility", 10)) {
+        if (compoundTag.contains("ArmorVisibility", 10)) {
             CompoundTag tag = compoundTag.getCompound("ArmorVisibility");
             useCosmeticArmorSlot[0] = tag.getBoolean("feetvisible");
             useCosmeticArmorSlot[1] = tag.getBoolean("legsvisible");
